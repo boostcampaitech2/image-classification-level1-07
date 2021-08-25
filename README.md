@@ -19,3 +19,6 @@ Accuracy = 75.5238, F1 = 0.6857
 
 ### wideResnet50, epoch 10, adam lr = 0.0005, CE, 해상도 512 384
 Accuracy = 73.4444, F1 = 0.6255
+
+### wideResnet50, epoch 10, adam lr = 0.0005, CE, 해상도 256 192
+Accuracy = 76.2540, F1 = 0.6904
