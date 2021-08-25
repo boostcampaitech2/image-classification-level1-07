@@ -1,9 +1,13 @@
 # image-classification-level1-07
 image-classification-level1-07 created by GitHub Classroom
 # 2021-08-24
+### efficientnet-b1, epoch 10, SGD lr = 0.05,  CE 224, 224
+Accuracy = 9~10, F1= 0.05 0.06 언저리
+
 ### efficientnet-b1, epoch 10, SGD lr = 0.05,  CE 256, 192
 .ipynb, Accuracy = 76.2857, F1 = 0.7141
 
+centercrop 300, 200 보다 resize 256 192가 더 잘나왔음
 b0보다 b1이 더 학습 결과가 잘나온다.
 
 # 2021-08-25
