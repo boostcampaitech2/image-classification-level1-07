@@ -7,9 +7,9 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.data import WeightedRandomSampler
 from tqdm import tqdm
-from data import CombinedDataset, get_labeled_datasets, get_unlabeled_datasetes
+from data import *
 from models import get_efficient_b1
-from utility import train_runner, SmoothCrossEntropy, set_seed
+from utility import *
 
 
 class_nums = [2745, 2050, 415, 3660, 4085, 545, 549, 410, 83, 732, 817, 109, 549, 410, 83, 732, 817, 109]
@@ -41,8 +41,7 @@ def create_labels(model, unlabeled_loader):
     
     return list
             
-        
-    
+
 if __name__ == '__main__':
     set_seed()
     labeled_root = '/opt/ml/input/data/train'
@@ -59,29 +58,9 @@ if __name__ == '__main__':
     
     l_train_set, l_val_set = torch.utils.data.random_split(labeled_dataset, [train_len, val_len])
     
-    weights = [class_weights[y] for _, y in l_train_set]
-    weights = torch.FloatTensor(weights)
+    l_train_loader, l_val_loader = get_train_val_loader(l_train_set, l_val_set)
     
-    l_train_loader = DataLoader(
-        l_train_set,
-        sampler=WeightedRandomSampler(weights, len(weights)),
-        batch_size=64,
-        num_workers=2
-    )
-    
-    l_val_loader = DataLoader(
-        l_val_set,
-        shuffle=False,
-        batch_size=64,
-        num_workers=2
-    )
-    
-    u_loader = DataLoader(
-        unlabeled_dataset,
-        shuffle=False,
-        batch_size=64,
-        num_workers=4
-    )
+    u_loader = get_loader(unlabeled_dataset)
     
     teacher_model = train_runner(model, criterion, l_train_loader, device, l_val_loader, epochs=30)
     teacher_model.load_state_dict(torch.load('/opt/ml/pseudo_labeling/best_loss.pth'))
@@ -97,12 +76,7 @@ if __name__ == '__main__':
     for i, label in enumerate(labels):
         combined_dataset.set_unlabeled_label(i, label)
     
-    combined_loader = DataLoader(
-        combined_dataset,
-        shuffle=True,
-        batch_size=64,
-        num_workers=4
-    )
+    combined_loader = get_loader(combined_dataset)
     
     student_model = get_efficient_b1()
     final_model = train_runner(student_model, criterion, combined_loader, device, epochs=8)

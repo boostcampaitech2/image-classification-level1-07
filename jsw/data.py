@@ -2,6 +2,7 @@ from numpy.core.numeric import zeros_like
 from torchvision import transforms
 import torch
 from torch.utils.data import Dataset
+from torch.utils.data import DataLoader, WeightedRandomSampler
 import os
 from torchvision.datasets import ImageFolder
 from PIL import Image
@@ -9,9 +10,41 @@ import pandas as pd
 import numpy as np
 from torchvision.transforms.transforms import CenterCrop, ToTensor
 
+class_nums = [2745, 2050, 415, 3660, 4085, 545, 549, 410, 83, 732, 817, 109, 549, 410, 83, 732, 817, 109]
+class_weights = [1./c for c in class_nums]
+class_weights = torch.FloatTensor(class_weights)
 
 mean_ = [0.485, 0.456, 0.406]
 std_ = [0.229, 0.224, 0.225]
+
+def get_loader(dataset, batch_size = 64, num_workers=4):
+    loader = DataLoader(
+        dataset,
+        shuffle=False,
+        batch_size=batch_size,
+        num_workers=num_workers
+    )
+    return loader
+
+def get_train_val_loader(l_train_set, l_val_set, batch_size=64, num_workers=2):
+    weights = [class_weights[y] for _, y in l_train_set]
+    weights = torch.FloatTensor(weights)
+    
+    l_train_loader = DataLoader(
+        l_train_set,
+        sampler=WeightedRandomSampler(weights, len(weights)),
+        batch_size=batch_size,
+        num_workers=num_workers
+    )
+    
+    l_val_loader = DataLoader(
+        l_val_set,
+        shuffle=False,
+        batch_size=batch_size,
+        num_workers=num_workers
+    )
+    
+    return l_train_loader, l_val_loader
 
 def get_labeled_datasets(root, csv_file, train):
     transform_labeled = transforms.Compose([
