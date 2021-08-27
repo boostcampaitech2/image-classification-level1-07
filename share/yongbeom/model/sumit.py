@@ -21,6 +21,7 @@ from albumentations.pytorch import ToTensorV2
 from model import BooDuckMaskModel, GenderNetwork, AgeNetwork, MaskNetwork, device
 from data_loader import get_data_transform
 
+
 class TestDataset(Dataset):
     def __init__(self, img_paths, transform):
         self.img_paths = img_paths
@@ -36,21 +37,20 @@ class TestDataset(Dataset):
     def __len__(self):
         return len(self.img_paths)
 
+
 # meta 데이터와 이미지 경로를 불러옵니다.
 submission = pd.read_csv(os.path.join(test_dir, 'info.csv'))
 image_dir = os.path.join(test_dir, 'images')
 
 # Test Dataset 클래스 객체를 생성하고 DataLoader를 만듭니다.
-image_paths = [os.path.join(image_dir, img_id) for img_id in submission.ImageID]
+image_paths = [
+    os.path.join(image_dir, img_id) for img_id in submission.ImageID
+]
 data_transform = get_data_transform(width=288, height=288, max_size=384)
 transform = data_transform['val']
 dataset = TestDataset(image_paths, transform)
 
-loader = DataLoader(
-    dataset,
-    batch_size=64,
-    shuffle=False
-)
+loader = DataLoader(dataset, batch_size=256, shuffle=False)
 
 # 모델을 정의합니다. (학습한 모델이 있다면 torch.load로 모델을 불러주세요!)
 device = torch.device('cuda')
@@ -59,9 +59,10 @@ device = torch.device('cuda')
 TARGET = None
 TIMM_MODEL = 'efficientnetv2_rw_s'
 
-model = BooDuckMaskModel(model_name=TIMM_MODEL, person_task=False)
+model = BooDuckMaskModel(model_name=TIMM_MODEL, person_task=True)
 model = model.to(device)
-model.load_state_dict(torch.load('backup_effNetV2_FocalLoss/effNetV2_weights.10.pth'))
+# model.load_state_dict(torch.load('backup_effNetV2_FocalLoss/effNetV2_weights.10.pth'))
+model.load_state_dict(torch.load('effNetV2_weights.15.pth'))
 model.eval()
 
 # 모델이 테스트 데이터셋을 예측하고 결과를 저장합니다.

@@ -21,14 +21,14 @@ print('Using {} device'.format(device))
 now = datetime.now()
 cur_time_str = now.strftime("%d%m%Y_%H%M")
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-8s %(levelname)-6s %(message)s',
-                    datefmt='%m-%d %H:%M',
-                    filename=f'./{cur_time_str}.log',
-                    filemode='w')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(name)-8s %(levelname)-6s %(message)s',
+    datefmt='%m-%d %H:%M',
+    filename=f'./{cur_time_str}.log',
+    filemode='w')
 
 logger = logging.getLogger('model')
-
 
 # def set_parameter_requires_grad(model, feature_extracting):
 #     if feature_extracting:
@@ -47,40 +47,52 @@ logger = logging.getLogger('model')
 
 #     return model_ft, input_size
 
+
 class AgeNetwork(nn.Module):
     def __init__(self, model_name, num_classes=3):
         super(AgeNetwork, self).__init__()
         # self.resnet18, _ = initialize_resnet18_model(3, False)
-        self.timm_pretrained = timm.create_model(model_name=model_name, num_classes=num_classes, pretrained=True)
+        self.timm_pretrained = timm.create_model(model_name=model_name,
+                                                 num_classes=num_classes,
+                                                 pretrained=True)
 
     def forward(self, x):
         # return self.resnet18(x)
         return self.timm_pretrained(x)
+
 
 class GenderNetwork(nn.Module):
     def __init__(self, model_name, num_classes=2):
         super(GenderNetwork, self).__init__()
         # self.resnet18, _ = initialize_resnet18_model(2, False)
-        self.timm_pretrained = timm.create_model(model_name=model_name, num_classes=num_classes, pretrained=True)
+        self.timm_pretrained = timm.create_model(model_name=model_name,
+                                                 num_classes=num_classes,
+                                                 pretrained=True)
 
     def forward(self, x):
         # return self.resnet18(x)
         return self.timm_pretrained(x)
 
+
 class PersonNetwork(nn.Module):
     def __init__(self, model_name, num_classes=6):
         super(PersonNetwork, self).__init__()
-        self.timm_pretrained = timm.create_model(model_name=model_name, num_classes=num_classes, pretrained=True)
+        self.timm_pretrained = timm.create_model(model_name=model_name,
+                                                 num_classes=num_classes,
+                                                 pretrained=True)
 
     def forward(self, x):
         return self.timm_pretrained(x)
+
 
 class MaskNetwork(nn.Module):
     def __init__(self, model_name, num_classes=3):
         super(MaskNetwork, self).__init__()
         # self.resnet18, _ = initialize_resnet18_model(3, False)
         # self.efficientnetv2_rw_s = timm.create_model(model_name=model_name, num_classes=3, pretrained=True)
-        self.timm_pretrained = timm.create_model(model_name=model_name, num_classes=num_classes, pretrained=True)
+        self.timm_pretrained = timm.create_model(model_name=model_name,
+                                                 num_classes=num_classes,
+                                                 pretrained=True)
 
     def forward(self, x):
         # return self.resnet18(x)
@@ -99,11 +111,12 @@ class FocalLoss(nn.Module):
         self.log_softmax = nn.LogSoftmax(dim=-1)
         # self.nll_loss = nn.NLLLoss(reduction=self.reduction)
         self.nll_loss = nn.NLLLoss()
-        
+
     def forward(self, input_tensor, target_tensor):
         log_prob = self.log_softmax(input_tensor)
         prob = torch.exp(log_prob)
-        return self.nll_loss(((1-prob)**self.gamma)*log_prob, target_tensor)
+        return self.nll_loss(((1 - prob)**self.gamma) * log_prob,
+                             target_tensor)
 
 
 class BooDuckMaskModel(nn.Module):
@@ -115,15 +128,18 @@ class BooDuckMaskModel(nn.Module):
         ### Each Model's Parms
         if self.person_task:
             self.person_network = PersonNetwork(model_name)
-            self.person_loss_fn = FocalLoss()
+            # self.person_loss_fn = FocalLoss()
+            self.person_loss_fn = nn.CrossEntropyLoss()
         else:
             self.age_network = AgeNetwork(model_name)
             self.gender_network = GenderNetwork(model_name)
-            self.age_loss_fn = FocalLoss()
-            self.gender_loss_fn = FocalLoss()
+            # self.age_loss_fn = FocalLoss()
+            self.age_loss_fn = nn.CrossEntropyLoss()
+            # self.gender_loss_fn = FocalLoss()
+            self.gender_loss_fn = nn.CrossEntropyLoss()
 
         self.mask_network = MaskNetwork(model_name)
-        self.mask_loss_fn = FocalLoss()
+        self.mask_loss_fn = nn.CrossEntropyLoss()
 
         ### BooDuck Parms
         if self.person_task:
@@ -133,7 +149,8 @@ class BooDuckMaskModel(nn.Module):
             self.gender_fc = nn.Linear(2, 18)
         self.mask_fc = nn.Linear(3, 18)
 
-        self.label_loss_fn = FocalLoss()
+        # self.label_loss_fn = FocalLoss()
+        self.label_loss_fn = nn.CrossEntropyLoss()
 
         ### ETC
         self.log_softmax = nn.LogSoftmax(dim=-1)
@@ -146,18 +163,18 @@ class BooDuckMaskModel(nn.Module):
     def get_loss_and_stat(self, x, y, phase):
 
         if self.person_task:
-            person_outputs = self.person_network(x) # Infer
-            person_loss = self.person_loss_fn(person_outputs, y[:, -3]) # Loss
+            person_outputs = self.person_network(x)  # Infer
+            person_loss = self.person_loss_fn(person_outputs, y[:, -3])  # Loss
         else:
             # Infer
             age_outputs = self.age_network(x)
             gender_outputs = self.gender_network(x)
             # Loss
-            age_loss =  self.age_loss_fn(age_outputs, y[:, -4])
+            age_loss = self.age_loss_fn(age_outputs, y[:, -4])
             gender_loss = self.gender_loss_fn(gender_outputs, y[:, -3])
 
-        mask_outputs = self.mask_network(x) # Infer
-        mask_loss = self.mask_loss_fn(mask_outputs, y[:, -2]) # Loss
+        mask_outputs = self.mask_network(x)  # Infer
+        mask_loss = self.mask_loss_fn(mask_outputs, y[:, -2])  # Loss
 
         if phase == 'train':  # Backward
             mask_loss.backward()
@@ -195,7 +212,11 @@ class BooDuckMaskModel(nn.Module):
 
         return label_loss, preds, _stat
 
-    def train_model(self, dataloaders, optimizer, scheduler=None, num_epochs=25):
+    def train_model(self,
+                    dataloaders,
+                    optimizer,
+                    scheduler=None,
+                    num_epochs=25):
         since = time.time()
 
         best_model_wts = copy.deepcopy(self.state_dict())
@@ -210,7 +231,7 @@ class BooDuckMaskModel(nn.Module):
                 if phase == 'train':
                     self.train()  # Set model to training mode
                 else:
-                    self.eval()   # Set model to evaluate mode
+                    self.eval()  # Set model to evaluate mode
 
                 running_loss = 0.0
                 running_f1 = 0
@@ -218,7 +239,7 @@ class BooDuckMaskModel(nn.Module):
 
                 # Iterate over data.
                 for inputs, labels in tqdm(dataloaders[phase]):
-                # for inputs, labels in dataloaders[phase]:
+                    # for inputs, labels in dataloaders[phase]:
                     inputs = inputs.to(device)
                     labels = labels.to(device)
 
@@ -236,7 +257,8 @@ class BooDuckMaskModel(nn.Module):
                         # loss = self.get_target_loss_and_stat(mask_outputs, labels)
 
                         # Whole
-                        loss, preds, stat = self.get_loss_and_stat(inputs, labels, phase)
+                        loss, preds, stat = self.get_loss_and_stat(
+                            inputs, labels, phase)
 
                         # backward + optimize only if in training phase
                         if phase == 'train':
@@ -245,27 +267,38 @@ class BooDuckMaskModel(nn.Module):
 
                     # statistics
                     running_loss += loss.item() * inputs.size(0)
-                    running_corrects += torch.sum(preds == labels[:, -1].data).detach().item()
-                    running_f1 += f1_score(preds.cpu().detach().numpy(), labels[:,-1].cpu().detach().numpy(), average='macro')
+                    running_corrects += torch.sum(
+                        preds == labels[:, -1].data).detach().item()
+                    running_f1 += f1_score(preds.cpu().detach().numpy(),
+                                           labels[:,
+                                                  -1].cpu().detach().numpy(),
+                                           average='macro')
                 # if phase == 'train':
                 #     scheduler.step()
 
-                epoch_loss = running_loss / dataloaders[phase].dataset.__len__()
+                epoch_loss = running_loss / dataloaders[phase].dataset.__len__(
+                )
                 # epoch_acc = running_corrects.double() / dataloaders[phase].dataset.__len__()
-                epoch_acc = running_corrects / dataloaders[phase].dataset.__len__()
+                epoch_acc = running_corrects / dataloaders[
+                    phase].dataset.__len__()
                 epoch_f1 = running_f1 / dataloaders[phase].__len__()
 
                 if self.person_task:
-                    logger.info(f"{phase:5} Loss: ({epoch_loss:.4f}) person: {stat['person_loss']:.4f} mask: {stat['mask_loss']:.4f} // Acc: {epoch_acc:.4f} F1: {epoch_f1:.4f}")
+                    logger.info(
+                        f"{phase:5} Loss: ({epoch_loss:.4f}) person: {stat['person_loss']:.4f} mask: {stat['mask_loss']:.4f} // Acc: {epoch_acc:.4f} F1: {epoch_f1:.4f}"
+                    )
                 else:
-                    logger.info(f"{phase:5} Loss: ({epoch_loss:.4f}) age:{stat['age_loss']:.4f} gender: {stat['gender_loss']:.4f} mask: {stat['mask_loss']:.4f} // Acc: {epoch_acc:.4f} F1: {epoch_f1:.4f}")
+                    logger.info(
+                        f"{phase:5} Loss: ({epoch_loss:.4f}) age:{stat['age_loss']:.4f} gender: {stat['gender_loss']:.4f} mask: {stat['mask_loss']:.4f} // Acc: {epoch_acc:.4f} F1: {epoch_f1:.4f}"
+                    )
 
                 # deep copy the model
                 if phase == 'val' and epoch_acc > best_acc:
                     best_acc = epoch_acc
                     best_model_wts = copy.deepcopy(self.state_dict())
-            if ((epoch+1)%5) == 0:
-                torch.save(self.state_dict(), f'effNetV2_weights.{epoch+1:02}.pth')
+            if ((epoch + 1) % 5) == 0:
+                torch.save(self.state_dict(),
+                           f'effNetV2_weights.{epoch+1:02}.pth')
 
             logger.info(f"")
 
@@ -278,20 +311,20 @@ class BooDuckMaskModel(nn.Module):
 
         # load best model weights
         # self.gender_network.load_state_dict(best_model_wts)
-        return self.gender_network
+        # return self.gender_network
 
-    def save(self,):
+    def save(self, ):
         torch.save(self.state_dict(), 'effNetV2_weights.final.pth')
 
     def forward(self, x):
         if self.person_task:
-            person_outputs = self.person_network(x) # Infer
+            person_outputs = self.person_network(x)  # Infer
         else:
             # Infer
             age_outputs = self.age_network(x)
             gender_outputs = self.gender_network(x)
 
-        mask_outputs = self.mask_network(x) # Infer
+        mask_outputs = self.mask_network(x)  # Infer
 
         if self.person_task:  # Get logits
             label_logits = self.person_fc(person_outputs.detach())
