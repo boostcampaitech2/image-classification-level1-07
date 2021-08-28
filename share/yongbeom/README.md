@@ -1,5 +1,41 @@
 # Yongbeom Kwon T2013's branch
 
+### Confusion Matrix
+```python
+from get_confusion_matrix import GetConfusionMatrix
+
+NUM_CLASS = 18
+fig_width = 4 + 0.5 * NUM_CLASS
+fig_height = 3.5 + 0.44 * NUM_CLASS
+## 18개 클래스이면 figsize=(13,12) 추천합니다.
+
+for epoch in range(3):
+    age_cm = GetConfusionMatrix(  # @<-----------------
+        save_path='cfs_mtx_log',
+        current_epoch=epoch,  # 구분점을 epoch으로 두었습니다. (반드시 Epoch일 필요 X)
+        n_classes=NUM_CLASS,
+        tag='age',  # for multi-model
+        # image_name='confusion_matrix',  # default file name
+        # only_wrong_label=True,  # wrong label만 표현합니다.
+        # count_label=False,  # 수량으로 표현합니다.
+        # savefig=False,  # for jupyter-notebook (default: True)
+        # showfig=True,  # for jupyter-notebook (default: False)
+        figsize=(fig_width, fig_height),  # <- default figsize
+        # dpi=200,  # Matplotlib's default is 150 dpi.
+        vmax=None)  # A max value of colorbar of heatmap
+
+    for _ in range(3):  # dummy Dataloader
+        # train
+        target = torch.randint(0, NUM_CLASS, (128, ))
+        pred = torch.randint(0, NUM_CLASS, (128, ))
+
+        # prediction
+        age_cm.collect_batch_preds(target, pred)  # @<-----------------
+
+    age_cm.epoch_plot()  # @<-----------------
+```
+
+
 ### Model
 ```bash
 model

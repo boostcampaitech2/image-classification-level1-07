@@ -19,7 +19,7 @@ parser.add_argument('-r',
                     '--random-seed',
                     metavar='N',
                     type=int,
-                    default=12345678,
+                    default=0,
                     help='')
 # parser.add_argument('-M',
 #                     '--make-from-raw',
@@ -125,6 +125,8 @@ df['mask_label'] = df["stem"].map({
     "mask5": 0,
 }).astype(int)
 
+df["gender_label"] = df["gender"].map({"male": 0, "female": 1}).astype(int)
+
 df.loc[df["age"] < 30, "age_label"] = 0
 df.loc[(df["age"] >= 30) & (df["age"] < 60), "age_label"] = 1
 df.loc[df["age"] >= 60, "age_label"] = 2
@@ -137,12 +139,24 @@ df["person_label"] = df["person_label"].astype(int)
 df.to_csv(f"{TRAIN_DATA_PATH}/train_labeled.csv", index=False)
 
 path_list = []
-for i in range(6):
+
+# LABEL
+for i in range(18):
     path_list.extend(
-        df.loc[df['person_label'] == i].drop_duplicates('path')['path'].sample(
-            n=8, random_state=12345678).to_list())
+        df.loc[df['label'] == i].drop_duplicates('path')['path'].sample(
+            n=8, random_state=RANDOM_SEED).to_list())
+
+## GENDER & AGE
+# for i in range(6):
+#     path_list.extend(
+#         df.loc[df['person_label'] == i].drop_duplicates('path')['path'].sample(
+#             n=16, random_state=RANDOM_SEED).to_list())
+# n=8).to_list())
+
+path_list = set(path_list)
 
 df.loc[df['path'].isin(path_list)].to_csv(
-    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.val.csv", index=False)
+    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.r{RANDOM_SEED}.val.csv", index=False)
 df.loc[~df['path'].isin(path_list)].to_csv(
-    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.train.csv", index=False)
+    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.r{RANDOM_SEED}.train.csv",
+    index=False)
