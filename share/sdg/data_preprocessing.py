@@ -5,11 +5,9 @@ from PIL import Image
 
 
 def generate_label(train_info ,option):
-    idx_num = train_info[train_info['stem']=='.ipynb_checkpoints'].index
-    train_info = train_info.drop(idx_num)
     train_image = list(train_info['img_path'])
     if option == 'normal':
-        train_label = list(train_info['label'])
+        train_label = list(train_info['class'])
         class_num = 18
     elif option == 'age':
         train_label = []
@@ -33,12 +31,12 @@ def generate_label(train_info ,option):
         train_label = []
         class_num = 3
         for mask_label in train_info['stem']:
-            if mask_label[0]=='m':
-                train_label.append(0)
-            elif mask_label[0]=='i':
+            if 'incorrect_mask' in mask_label:
                 train_label.append(1)
-            elif mask_label[0]=='n':
-                train_label.append(2)  
+            elif 'normal' in mask_label:
+                train_label.append(2)
+            else:
+                train_label.append(0) 
     return train_image, train_label, class_num
 
   
