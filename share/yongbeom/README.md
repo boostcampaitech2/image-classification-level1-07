@@ -1,6 +1,7 @@
 # Yongbeom Kwon T2013's branch
 
 ### Confusion Matrix
+사용하시는 train이나 model 코드에 from import를 통해 해당 함수를 가져온 다음 사용하시면 됩니다.
 ```python
 from get_confusion_matrix import GetConfusionMatrix
 
