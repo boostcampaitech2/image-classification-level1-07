@@ -1,0 +1,172 @@
+2021-08-29 17:41:43,683 INFO    MainThread:23563 [internal.py:wandb_internal():86] W&B internal server running at pid: 23563, started at: 2021-08-29 17:41:43.682319
+2021-08-29 17:41:43,695 INFO    WriterThread:23563 [datastore.py:open_for_write():77] open: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/run-23cqd6lu.wandb
+2021-08-29 17:41:43,695 DEBUG   SenderThread:23563 [sender.py:send():182] send: header
+2021-08-29 17:41:43,696 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: check_version
+2021-08-29 17:41:43,697 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: check_version
+2021-08-29 17:41:43,891 DEBUG   SenderThread:23563 [sender.py:send():182] send: run
+2021-08-29 17:41:44,130 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: run_start
+2021-08-29 17:41:44,135 DEBUG   HandlerThread:23563 [meta.py:__init__():40] meta init
+2021-08-29 17:41:44,135 DEBUG   HandlerThread:23563 [meta.py:__init__():54] meta init done
+2021-08-29 17:41:44,136 DEBUG   HandlerThread:23563 [meta.py:probe():211] probe
+2021-08-29 17:41:44,138 INFO    SenderThread:23563 [dir_watcher.py:__init__():169] watching files in: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files
+2021-08-29 17:41:44,138 INFO    SenderThread:23563 [sender.py:_start_run_threads():740] run started: 23cqd6lu with start time 1630258901
+2021-08-29 17:41:44,139 DEBUG   SenderThread:23563 [sender.py:send():182] send: summary
+2021-08-29 17:41:44,141 INFO    SenderThread:23563 [sender.py:_save_file():873] saving file wandb-summary.json with policy end
+2021-08-29 17:41:44,144 DEBUG   HandlerThread:23563 [meta.py:_setup_git():201] setup git
+2021-08-29 17:41:44,153 DEBUG   HandlerThread:23563 [meta.py:_setup_git():208] setup git done
+2021-08-29 17:41:44,154 DEBUG   HandlerThread:23563 [meta.py:_save_pip():58] save pip
+2021-08-29 17:41:44,156 DEBUG   HandlerThread:23563 [meta.py:_save_pip():72] save pip done
+2021-08-29 17:41:44,157 DEBUG   HandlerThread:23563 [meta.py:_save_conda():79] save conda
+2021-08-29 17:41:45,145 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/conda-environment.yaml
+2021-08-29 17:41:45,146 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/requirements.txt
+2021-08-29 17:41:45,147 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/wandb-summary.json
+2021-08-29 17:41:48,517 DEBUG   HandlerThread:23563 [meta.py:_save_conda():87] save conda done
+2021-08-29 17:41:48,517 DEBUG   HandlerThread:23563 [meta.py:probe():249] probe done
+2021-08-29 17:41:48,862 DEBUG   SenderThread:23563 [sender.py:send():182] send: files
+2021-08-29 17:41:48,862 INFO    SenderThread:23563 [sender.py:_save_file():873] saving file wandb-metadata.json with policy now
+2021-08-29 17:41:48,871 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:41:48,871 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:41:49,140 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/conda-environment.yaml
+2021-08-29 17:41:49,141 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/wandb-metadata.json
+2021-08-29 17:41:49,141 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:41:49,573 INFO    Thread-17 :23563 [upload_job.py:push():137] Uploaded file /tmp/tmpwr88edwnwandb/1mgwx8lh-wandb-metadata.json
+2021-08-29 17:41:51,142 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:41:53,143 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:41:55,144 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:41:57,145 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:41:59,146 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:01,147 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:03,149 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:04,073 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:42:04,073 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:42:05,150 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:07,151 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:09,152 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:11,154 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:12,318 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:42:13,155 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:15,156 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:17,157 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:19,158 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:19,263 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:42:19,264 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:42:21,160 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:23,162 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:25,163 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:27,164 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:29,165 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:31,167 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:33,168 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:34,456 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:42:34,457 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:42:35,169 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:37,170 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:39,171 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:41,172 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:42,447 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:42:43,173 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:45,174 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:47,175 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:49,177 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:49,647 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:42:49,648 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:42:51,178 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:54,180 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:55,180 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:57,182 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:58,182 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:42:58,855 DEBUG   SenderThread:23563 [sender.py:send():182] send: history
+2021-08-29 17:42:58,856 DEBUG   SenderThread:23563 [sender.py:send():182] send: summary
+2021-08-29 17:42:58,857 INFO    SenderThread:23563 [sender.py:_save_file():873] saving file wandb-summary.json with policy end
+2021-08-29 17:42:59,183 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/wandb-summary.json
+2021-08-29 17:43:00,184 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:01,184 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:02,185 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:03,185 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:04,186 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:04,839 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:43:04,839 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:43:06,187 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:08,188 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:10,189 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:12,191 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:12,586 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:43:14,192 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:16,193 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:18,194 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:20,027 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:43:20,028 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:43:20,195 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:22,196 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:24,197 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:26,199 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:28,200 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:30,201 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:32,202 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:34,204 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:35,222 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:43:35,222 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:43:36,205 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:38,206 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:40,207 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:42,209 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:42,717 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:43:44,210 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:46,211 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:48,213 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:50,214 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:50,417 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:43:50,418 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:43:52,215 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:54,216 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:56,218 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:43:58,219 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:00,220 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:02,222 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:04,223 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:05,223 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:05,614 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:44:05,614 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:44:07,225 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:08,226 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:08,944 DEBUG   SenderThread:23563 [sender.py:send():182] send: history
+2021-08-29 17:44:08,944 DEBUG   SenderThread:23563 [sender.py:send():182] send: summary
+2021-08-29 17:44:08,945 INFO    SenderThread:23563 [sender.py:_save_file():873] saving file wandb-summary.json with policy end
+2021-08-29 17:44:09,226 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/wandb-summary.json
+2021-08-29 17:44:10,227 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:11,227 INFO    Thread-14 :23563 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_174141-23cqd6lu/files/output.log
+2021-08-29 17:44:12,861 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:44:20,806 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:44:20,807 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:44:36,011 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:44:36,011 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:44:42,982 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:44:51,202 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:44:51,202 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:45:06,393 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:45:06,394 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:45:13,099 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:45:21,581 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:45:21,582 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:45:36,774 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:45:36,774 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:45:43,217 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:45:51,962 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:45:51,963 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:46:07,164 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:46:07,164 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:46:13,335 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:46:22,356 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:46:22,356 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:46:37,545 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:46:37,545 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:46:43,452 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:46:52,736 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:46:52,736 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:47:07,930 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:47:07,931 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:47:13,570 DEBUG   SenderThread:23563 [sender.py:send():182] send: stats
+2021-08-29 17:47:23,123 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:47:23,124 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 17:47:38,315 DEBUG   HandlerThread:23563 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 17:47:38,315 DEBUG   SenderThread:23563 [sender.py:send_request():196] send_request: stop_status

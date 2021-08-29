@@ -1,0 +1,35 @@
+2021-08-29 10:41:56,656 INFO    MainThread:713 [internal.py:wandb_internal():86] W&B internal server running at pid: 713, started at: 2021-08-29 10:41:56.655892
+2021-08-29 10:41:56,667 DEBUG   SenderThread:713 [sender.py:send():182] send: header
+2021-08-29 10:41:56,668 INFO    WriterThread:713 [datastore.py:open_for_write():77] open: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/run-2ztc1eht.wandb
+2021-08-29 10:41:56,668 DEBUG   HandlerThread:713 [handler.py:handle_request():126] handle_request: check_version
+2021-08-29 10:41:56,669 DEBUG   SenderThread:713 [sender.py:send_request():196] send_request: check_version
+2021-08-29 10:41:56,889 DEBUG   SenderThread:713 [sender.py:send():182] send: run
+2021-08-29 10:41:57,143 DEBUG   HandlerThread:713 [handler.py:handle_request():126] handle_request: run_start
+2021-08-29 10:41:57,151 DEBUG   HandlerThread:713 [meta.py:__init__():40] meta init
+2021-08-29 10:41:57,152 DEBUG   HandlerThread:713 [meta.py:__init__():54] meta init done
+2021-08-29 10:41:57,152 DEBUG   HandlerThread:713 [meta.py:probe():211] probe
+2021-08-29 10:41:57,153 INFO    SenderThread:713 [dir_watcher.py:__init__():169] watching files in: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files
+2021-08-29 10:41:57,153 INFO    SenderThread:713 [sender.py:_start_run_threads():740] run started: 2ztc1eht with start time 1630233714
+2021-08-29 10:41:57,153 DEBUG   SenderThread:713 [sender.py:send():182] send: summary
+2021-08-29 10:41:57,154 INFO    SenderThread:713 [sender.py:_save_file():873] saving file wandb-summary.json with policy end
+2021-08-29 10:41:57,159 DEBUG   HandlerThread:713 [meta.py:_setup_git():201] setup git
+2021-08-29 10:41:57,174 DEBUG   HandlerThread:713 [meta.py:_setup_git():208] setup git done
+2021-08-29 10:41:57,174 DEBUG   HandlerThread:713 [meta.py:_save_pip():58] save pip
+2021-08-29 10:41:57,175 DEBUG   HandlerThread:713 [meta.py:_save_pip():72] save pip done
+2021-08-29 10:41:57,176 DEBUG   HandlerThread:713 [meta.py:_save_conda():79] save conda
+2021-08-29 10:41:58,160 INFO    Thread-15 :713 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/conda-environment.yaml
+2021-08-29 10:41:58,161 INFO    Thread-15 :713 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/requirements.txt
+2021-08-29 10:41:58,161 INFO    Thread-15 :713 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/wandb-summary.json
+2021-08-29 10:42:01,542 DEBUG   HandlerThread:713 [meta.py:_save_conda():87] save conda done
+2021-08-29 10:42:01,542 DEBUG   HandlerThread:713 [meta.py:probe():249] probe done
+2021-08-29 10:42:01,883 DEBUG   SenderThread:713 [sender.py:send():182] send: files
+2021-08-29 10:42:01,883 INFO    SenderThread:713 [sender.py:_save_file():873] saving file wandb-metadata.json with policy now
+2021-08-29 10:42:01,895 DEBUG   HandlerThread:713 [handler.py:handle_request():126] handle_request: stop_status
+2021-08-29 10:42:01,901 DEBUG   SenderThread:713 [sender.py:send_request():196] send_request: stop_status
+2021-08-29 10:42:02,155 INFO    Thread-15 :713 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/conda-environment.yaml
+2021-08-29 10:42:02,156 INFO    Thread-15 :713 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/wandb-metadata.json
+2021-08-29 10:42:02,156 INFO    Thread-15 :713 [dir_watcher.py:_on_file_created():217] file/dir created: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/output.log
+2021-08-29 10:42:02,804 INFO    Thread-17 :713 [upload_job.py:push():137] Uploaded file /tmp/tmp4_bdk_2qwandb/3b7fcl7b-wandb-metadata.json
+2021-08-29 10:42:04,156 INFO    Thread-15 :713 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/output.log
+2021-08-29 10:42:06,158 INFO    Thread-15 :713 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/output.log
+2021-08-29 10:42:08,159 INFO    Thread-15 :713 [dir_watcher.py:_on_file_modified():230] file/dir modified: /opt/ml/code/EfficientNet_cross_level_1/wandb/run-20210829_104154-2ztc1eht/files/output.log

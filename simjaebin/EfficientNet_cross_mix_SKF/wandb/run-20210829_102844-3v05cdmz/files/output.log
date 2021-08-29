@@ -1,0 +1,39 @@
+Epoch 0/3
+----------
+
+
+  1%|█▎                                                                                                                                                                                    | 1/138 [00:04<09:09,  4.01s/it]
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/__main__.py", line 45, in <module>
+    cli.main()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 444, in main
+    run()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 285, in run_file
+    runpy.run_path(target_as_str, run_name=compat.force_str("__main__"))
+  File "/opt/conda/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/opt/conda/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/code/EfficientNet_cross_level_1/main.py", line 60, in <module>
+    model = train(model, criterion, optimizer, scheduler, dataloaders, num_epochs=4)
+  File "/opt/ml/code/EfficientNet_cross_level_1/train.py", line 39, in train
+    outputs = model(inputs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/efficientnet_pytorch/model.py", line 314, in forward
+    x = self.extract_features(inputs)
+  File "/opt/conda/lib/python3.8/site-packages/efficientnet_pytorch/model.py", line 299, in extract_features
+    x = self._swish(self._bn1(self._conv_head(x)))
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/efficientnet_pytorch/utils.py", line 80, in forward
+    return SwishImplementation.apply(x)
+  File "/opt/conda/lib/python3.8/site-packages/efficientnet_pytorch/utils.py", line 67, in forward
+    result = i * torch.sigmoid(i)
+RuntimeError: CUDA out of memory. Tried to allocate 30.00 MiB (GPU 0; 31.75 GiB total capacity; 15.17 GiB already allocated; 17.75 MiB free; 15.41 GiB reserved in total by PyTorch)

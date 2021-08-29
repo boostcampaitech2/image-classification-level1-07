@@ -1,0 +1,48 @@
+Epoch 0/3
+----------
+  0%|                                                                                                                                                                                              | 0/138 [00:00<?, ?it/s]
+tensor([[ 0.2055,  0.0116,  0.1785,  ...,  0.0606, -0.2952, -0.0565],
+        [-0.0968,  0.0184, -0.0112,  ...,  0.1794, -0.2910,  0.0581],
+        [ 0.1583,  0.0086,  0.1296,  ..., -0.0337,  0.0584,  0.3564],
+        ...,
+        [ 0.2499,  0.2620,  0.0009,  ...,  0.0459,  0.0483, -0.0592],
+        [ 0.0421,  0.2167,  0.0652,  ..., -0.0834,  0.0376, -0.0992],
+        [-0.0166, -0.1130,  0.2007,  ...,  0.0207, -0.1896, -0.1893]],
+
+
+
+
+
+
+
+
+
+ 30%|█████████████████████████████████████████████████████▊                                                                                                                               | 41/138 [00:21<00:49,  1.95it/s]
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/__main__.py", line 45, in <module>
+    cli.main()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 444, in main
+    run()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 285, in run_file
+    runpy.run_path(target_as_str, run_name=compat.force_str("__main__"))
+  File "/opt/conda/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/opt/conda/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/code/EfficientNet_cross_level_1/main.py", line 60, in <module>
+    model = train(model, criterion, optimizer, scheduler, dataloaders, num_epochs=4)
+  File "/opt/ml/code/EfficientNet_cross_level_1/train.py", line 50, in train
+    optimizer.step()
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/lr_scheduler.py", line 67, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+    return func(*args, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/sgd.py", line 106, in step
+    buf.mul_(momentum).add_(d_p, alpha=1 - dampening)
+KeyboardInterrupt

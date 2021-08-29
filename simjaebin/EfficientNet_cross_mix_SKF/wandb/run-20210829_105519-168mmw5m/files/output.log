@@ -1,0 +1,33 @@
+Epoch 0/3
+----------
+  0%|                                                                                                                                                                                              | 0/276 [00:00<?, ?it/s]
+
+  3%|████▌                                                                                                                                                                                 | 7/276 [00:04<02:42,  1.66it/s]
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/__main__.py", line 45, in <module>
+    cli.main()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 444, in main
+    run()
+  File "/opt/ml/.vscode-server/extensions/ms-python.python-2021.8.1159798656/pythonFiles/lib/python/debugpy/../debugpy/server/cli.py", line 285, in run_file
+    runpy.run_path(target_as_str, run_name=compat.force_str("__main__"))
+  File "/opt/conda/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/opt/conda/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/ml/code/EfficientNet_cross_level_1/main.py", line 61, in <module>
+    model = train(model, criterion, optimizer, scheduler, dataloaders, num_epochs=4)
+  File "/opt/ml/code/EfficientNet_cross_level_1/train.py", line 49, in train
+    optimizer.step()
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/lr_scheduler.py", line 67, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+    return func(*args, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/sgd.py", line 106, in step
+    buf.mul_(momentum).add_(d_p, alpha=1 - dampening)
+KeyboardInterrupt
