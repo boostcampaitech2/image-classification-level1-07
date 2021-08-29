@@ -141,22 +141,21 @@ df.to_csv(f"{TRAIN_DATA_PATH}/train_labeled.csv", index=False)
 path_list = []
 
 # LABEL
-for i in range(18):
-    path_list.extend(
-        df.loc[df['label'] == i].drop_duplicates('path')['path'].sample(
-            n=8, random_state=RANDOM_SEED).to_list())
+# for i in range(18):
+#     path_list.extend(
+#         df.loc[df['label'] == i].drop_duplicates('path')['path'].sample(
+#             n=8, random_state=RANDOM_SEED).to_list())
 
 ## GENDER & AGE
-# for i in range(6):
-#     path_list.extend(
-#         df.loc[df['person_label'] == i].drop_duplicates('path')['path'].sample(
-#             n=16, random_state=RANDOM_SEED).to_list())
-# n=8).to_list())
+for i in range(6):
+    path_list.extend(
+        df.loc[df['person_label'] == i].drop_duplicates('path')['path'].sample(
+            n=8, random_state=RANDOM_SEED).to_list())
 
 path_list = set(path_list)
 
 df.loc[df['path'].isin(path_list)].to_csv(
-    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.r{RANDOM_SEED}.val.csv", index=False)
+    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.c6r{RANDOM_SEED}.val.csv", index=False)
 df.loc[~df['path'].isin(path_list)].to_csv(
-    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.r{RANDOM_SEED}.train.csv",
+    f"{TRAIN_DATA_PATH}/{OUTPUT_FILENAME}.c6r{RANDOM_SEED}.train.csv",
     index=False)
