@@ -169,7 +169,7 @@ class GetConfusionMatrix:
                                                   _vmax=self.vmax)
         if self.savefig:
             fig.savefig(save_image_name, dpi=self.dpi)
-            fig.close()
+            plt.close(fig)
         if self.showfig:
             fig.show()
 
