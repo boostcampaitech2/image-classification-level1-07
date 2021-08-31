@@ -230,9 +230,9 @@ if __name__ == "__main__":
             save_path='confusion_matrix_image',
             current_epoch=epoch,  # 구분점을 epoch으로 두었습니다. (반드시 Epoch일 필요 X)
             n_classes=NUM_CLASS,
-            tag='wrong_False_count_False',  # for multi-model
+            tag='wrong_False_count_True',  # for multi-model
             # image_name='confusion_matrix',  # default file name
-            # only_wrong_label=False,  # wrong label만 표현합니다. (default: True)
+            only_wrong_label=False,  # wrong label만 표현합니다. (default: True)
             # count_label=True,  # 수량으로 표현합니다.(default: False)
             # savefig=False,  # for jupyter-notebook (default: True)
             # showfig=True,  # for jupyter-notebook (default: False)
