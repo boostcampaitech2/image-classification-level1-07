@@ -1,0 +1,14 @@
+
+****************Train start!*****************
+Traceback (most recent call last):
+  File "main.py", line 149, in <module>
+    result, best_model_state, optimizer_st = train_cutmix(data_loader, args)
+  File "/opt/ml/code/trainer.py", line 78, in train_cutmix
+    optimizer = opt_module(params, lr = args.learning_rate)
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/adamw.py", line 47, in __init__
+    super(AdamW, self).__init__(params, defaults)
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/optimizer.py", line 52, in __init__
+    self.add_param_group(param_group)
+  File "/opt/conda/lib/python3.8/site-packages/torch/optim/optimizer.py", line 253, in add_param_group
+    raise ValueError("some parameters appear in more than one parameter group")
+ValueError: some parameters appear in more than one parameter group

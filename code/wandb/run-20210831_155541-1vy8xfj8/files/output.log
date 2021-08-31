@@ -1,0 +1,12 @@
+
+****************Train start!*****************
+Traceback (most recent call last):
+  File "main.py", line 195, in <module>
+    result, best_model_state, optimizer_st = train(data_loader, args, teacher = True)
+  File "/opt/ml/code/trainer.py", line 247, in train
+    model = get_model(model_name).to(device)
+  File "/opt/ml/code/model.py", line 4, in get_model
+    model = timm.create_model(model_name, pretrained = True, num_classes = 18)
+  File "/opt/conda/lib/python3.8/site-packages/timm/models/factory.py", line 78, in create_model
+    raise RuntimeError('Unknown model (%s)' % model_name)
+RuntimeError: Unknown model (bit_tiny_patch16_224)
