@@ -6,18 +6,7 @@ from dataset import TestDataset
 from torch.utils.data import DataLoader
 import numpy as np
 from model_normal import Classification_normal, get_classweight
-import wandb
-import random
-
-def seed_everything(seed):
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)  # if use multi-GPU
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    np.random.seed(seed)
-    random.seed(seed)
-    return 
+from train import seed_everything
 
 model_name = 'vit_large_patch16_224'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

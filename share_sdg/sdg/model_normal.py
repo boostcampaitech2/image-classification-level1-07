@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 import timm
-import torch.optim as optim
-import torch.nn.init as init
 
 def get_classweight(train_df):
     return list(train_df['class'].value_counts().sort_index())

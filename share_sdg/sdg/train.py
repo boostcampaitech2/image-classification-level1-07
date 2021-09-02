@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim.lr_scheduler import ReduceLROnPlateau, CosineAnnealingLR, StepLR
+from torch.optim.lr_scheduler import StepLR
 from dataset import TrainDataset
 from model_normal import Classification_normal, get_classweight
 from tqdm import tqdm
@@ -9,7 +9,16 @@ from sklearn.metrics import f1_score
 import numpy as np
 from torch.utils.data import DataLoader
 import wandb
-from torch.utils.data.sampler import WeightedRandomSampler
+import random
+
+def seed_everything(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)  # if use multi-GPU
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    np.random.seed(seed)
+    random.seed(seed)
 
 def rand_bbox(size, lam): # size : [Batch_size, Channel, Width, Height]
     W = size[2] 
