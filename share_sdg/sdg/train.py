@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim.lr_scheduler import StepLR
 from dataset import TrainDataset
 from model_normal import Classification_normal, get_classweight
 from tqdm import tqdm
@@ -53,7 +52,6 @@ def train_normal(model_name, num_epochs, batch_size, early_stop, learning_rate, 
                     {"params": classifier, "lr": learning_rate}
     ]
     optimizer = optim.AdamW(params, lr=learning_rate)
-    # scheduler = StepLR(optimizer, step_size=1, gamma=0.1, verbose=True)
     if continue_dict:
         model.load_state_dict(continue_dict['model_state_dict'])
         # optimizer.load_state_dict(continue_dict['optimizer_state_dict'])
@@ -141,7 +139,6 @@ def train_normal(model_name, num_epochs, batch_size, early_stop, learning_rate, 
             early_stop_count = 0
         else:
             early_stop_count += 1
-        # scheduler.step()
         torch.save({'model_state_dict' : model.state_dict(), 'optimizer_state_dict' : optimizer.state_dict()}, f'/opt/ml/input/data/eval/best_param/model_vitL_new_epoch_{epoch}.pt')
 
         if early_stop_count == early_stop:
