@@ -1,171 +1,198 @@
-from numpy.core.numeric import zeros_like
-from torchvision import transforms
-import torch
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader, WeightedRandomSampler
 import os
-from torchvision.datasets import ImageFolder
-from PIL import Image
+from re import L
 import pandas as pd
-import numpy as np
-from torchvision.transforms.transforms import CenterCrop, ToTensor
+from PIL import Image
 
-class_nums = [2745, 2050, 415, 3660, 4085, 545, 549, 410, 83, 732, 817, 109, 549, 410, 83, 732, 817, 109]
-class_weights = [1./c for c in class_nums]
-class_weights = torch.FloatTensor(class_weights)
+import torch
+from pandas.core.frame import DataFrame
+from torch.utils.data import DataLoader, Dataset
+from torch.utils.data.sampler import RandomSampler
+from torchvision.datasets import ImageFolder
+
+from albumentations import *
+from albumentations.pytorch.transforms import *
 
 mean_ = [0.485, 0.456, 0.406]
 std_ = [0.229, 0.224, 0.225]
 
-# gets Dataloader from dataset
-def get_loader(dataset, batch_size = 64, num_workers=4):
-    loader = DataLoader(
-        dataset,
-        shuffle=False,
-        batch_size=batch_size,
-        num_workers=num_workers
-    )
-    return loader
-
-# gets Dataloader from train and validation datasets
-def get_train_val_loader(l_train_set, l_val_set, batch_size=64, num_workers=2):
-    weights = [class_weights[y] for _, y in l_train_set]
-    weights = torch.FloatTensor(weights)
-    
-    l_train_loader = DataLoader(
-        l_train_set,
-        sampler=WeightedRandomSampler(weights, len(weights)),
-        batch_size=batch_size,
-        num_workers=num_workers
-    )
-    
-    l_val_loader = DataLoader(
-        l_val_set,
-        shuffle=False,
-        batch_size=batch_size,
-        num_workers=num_workers
-    )
-    
-    return l_train_loader, l_val_loader
-
-# gets datasets for labeled dataets
-def get_labeled_datasets(root, csv_file, train):
-    transform_labeled = transforms.Compose([
-        transforms.RandomHorizontalFlip(),
-        transforms.CenterCrop(384),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=mean_, std=std_)])
-    
-    transform_val = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=mean_, std=std_)])
+def get_dataset(root, csv_dir, train=True, cutmix=False):
     if train:
-        dataset = GivenDataset(root, csv_file, train=train, transform=transform_labeled)
+        if cutmix:
+            #? weak augmentation pipeline when cutmix applied
+            transform = Compose([
+                HorizontalFlip(),
+                Resize(width=224, height=224),
+                Normalize(mean=mean_, std=std_),
+                ToTensorV2()
+            ])
+            #? strong augmentation pipeline when cutmix NOT applied
+            aug_transform = Compose([
+                Resize(width=224,height=224),
+                HorizontalFlip(),
+                RandomBrightnessContrast(brightness_limit=(-0.3, 0.3), contrast_limit=(-0.3, 0.3), p=0.5),
+                Rotate(limit=5),   
+                GaussNoise(p=0.2),
+                Normalize(mean=mean_, std=std_),
+                ToTensorV2(),
+            ])
+            return CustomDataset(root, csv_dir, train, transform, aug_transform)
+        else:
+            #? augmentation pipeline when no cutmix
+            aug_transform = Compose([
+                Resize(width=224,height=224),
+                HorizontalFlip(),
+                Rotate(limit=5),
+                Normalize(mean=mean_, std=std_),
+                ToTensorV2(),
+            ])
+            return CustomDataset(root, csv_dir, train, aug_transform)
     else:
-        dataset = GivenDataset(root, csv_file, train=train, transform=transform_val)
+        #? Validation transformation pipeline
+        transform = Compose([
+                Resize(width=224,height=224),
+                Normalize(mean=mean_, std=std_),
+                ToTensorV2(),
+        ])
+        return CustomDataset(root, csv_dir, train, transform)
+    
+def get_unlabeled_dataset(root, train=True):
+    transform = Compose([
+                Resize(width=224,height=224),
+                Normalize(mean=mean_, std=std_),
+                ToTensorV2(),
+        ])
+    dataset = UnlabeledDataset(root, transform)
     return dataset
 
-# gets dataset for unlabeled datasets
-def get_unlabeled_datasetes(root, train):
-    dataset = UnlabeledDataset(root, train)
-    return dataset
-
-# unlabeled dataset class
-class UnlabeledDataset(Dataset):
-    def __init__(self, root, train=True):
+def get_combined_dataset(root, unlabeled_root, csv, cutmix=False):
+    transform = Compose([
+        HorizontalFlip(),
+        Resize(width=224,height=224),
+        Normalize(mean=mean_, std=std_, always_apply=True),
+        ToTensorV2(),
+    ])
+    aug = Compose([
+        Resize(height=224, width=224),
+        HorizontalFlip(),
+        Rotate(limit=5),
+        CLAHE(p=0.5),
+        RandomBrightnessContrast(brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), p=0.5),
+        GaussNoise(p=0.5),
+        Normalize(mean=mean_,std=std_,always_apply=True),
+        ToTensorV2(),
+    ],p=1.0)
+    if not cutmix:
+        return CombinedDataset(root, unlabeled_root, csv, transform=aug)
+    else:
+        return CombinedDataset(root, unlabeled_root, csv, transform=transform, aug=aug)
+    
+def get_data_loader(dataset,
+                    sampler=None,
+                    batch_size=64,
+                    num_workers=2,
+                    train=True):
+    
+    #? if no sampler given, random sampler
+    if sampler is None:
+        sampler = RandomSampler(dataset)
+    
+    if train:
+        loader = DataLoader(dataset,
+                            sampler=sampler,
+                            batch_size=batch_size,
+                            num_workers=num_workers)
+    else:
+        loader = DataLoader(dataset,
+                            shuffle=False,
+                            num_workers=num_workers)
+        
+    return loader
+        
+class CustomDataset(Dataset):
+    def __init__(self, root, csv_dir, train=True, ori_transform=None, aug_transform=None, cutmix=False):
         self.root = root
         self.train = train
+        self.cutmix = cutmix
+        self.ori_transform = ori_transform
+        self.aug_transform = aug_transform
+        
+        self.csv_file = pd.read_csv(os.path.join(self.root, csv_dir))
+    
+    def __len__(self):
+        return len(self.csv_file['path'])
+    
+    def __getitem__(self, index):
+        path, label = self.csv_file.iloc[index]
+        X = Image.open(path)
+        y = label
+        if self.ori_transform is not None:
+                ori = self.ori_transform(image=np.array(X))['image']
+        if self.aug_transform is not None:
+                aug = self.aug_transform(image=np.array(X))['image']    
+                    
+        if self.train:
+            if self.cutmix:
+                return aug, ori, y
+            else:
+                return ori, y
+        else:
+            return ori, int(y)
+
+class UnlabeledDataset(Dataset):
+    def __init__(self, root, transform=None):
+        self.root = root
+        self.transform = transform
         
         self.data = ImageFolder(self.root)
+        self.label = [0 for _ in range(len(self.data))]
         
-        self.label = [0 for i in range(len(self.data))]
-        
-        self.augmentations = transforms.Compose([
-            transforms.RandomRotation(5),
-            transforms.RandomHorizontalFlip(),
-            transforms.CenterCrop(384),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=mean_, std=std_)
-        ])
-        self.normalize = transforms.Compose([
-            transforms.CenterCrop(384),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=mean_, std=std_)])
     def __len__(self):
         return len(self.data)
     
     def __getitem__(self, index):
         X, _ = self.data[index]
         
-        if self.train:
-            return self.augmentations(X), self.label[index]
+        if self.transform is not None:
+            return self.transform(image=np.array(X))['image'], self.label[index]
         else:
-            return self.normalize(X), self.label[index]
-
-# given dataset class
-class GivenDataset(Dataset):
-    def __init__(self, root, csv_dir, train=True, transform=None, target_transform=None):
+            return X, self.label[index]
+        
+class CombinedDataset(Dataset):
+    def __init__ (self, root, unlabeled_root, csv_dir, train=True, transform=None, aug=None):
         self.root = root
         self.csv_file = pd.read_csv(os.path.join(root, csv_dir))
-        self.train = train
-        self.transform = transform
-
-    def __len__(self):
-        return len(self.csv_file['id'])
-
-    def __getitem__(self, idx):
-        _, _, _, _, path, label = self.csv_file.iloc[idx]
-        X = Image.open(path)
-        y = label
-        if self.transform is not None:
-            X = self.transform(X)
-        return X, y
-
-# concatenated dataset class (unlabeled + labeled)
-class CombinedDataset(Dataset):
-    def __init__(self, labeled_root, csv_dir, unlabeled_root, train=True):
-        self.train = train
-        
         self.unlabeled_data = ImageFolder(unlabeled_root)
-        self.labeled_data = pd.read_csv(os.path.join(labeled_root, csv_dir))
         
-        self.u_len = len(self.unlabeled_data)
-        self.l_len = len(self.labeled_data['id'])
+        self.labeled_len = len(self.csv_file)
+        self.unlabeled_len = len(self.unlabeled_data)
         
-        u_label = [0 for _ in range(self.u_len)]
-        self.u_label = torch.LongTensor(u_label)
-        self.augmentations = transforms.Compose([
-            transforms.RandomRotation(5),
-            transforms.RandomHorizontalFlip(),
-            transforms.CenterCrop(384),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=mean_, std=std_)
-        ])
-        self.normalize = transforms.Compose([
-            transforms.CenterCrop(384),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=mean_, std=std_)])
+        self.unlabeled_label = [0 for _ in range(self.unlabeled_len)]
+        self.unlabeled_label = torch.LongTensor(self.unlabeled_label)
         
-    def __len__(self):
-        return self.u_len + self.l_len
+        self.aug = aug
+        self.transform = transform
+        
+    def __len__ (self):
+        return self.unlabeled_len + self.labeled_len
     
-    def __getitem__(self, idx):
-        X = None
-        y = None
-        if idx < self.l_len:
-            _, _, _, _, path, label = self.labeled_data.iloc[idx]
+    def __getitem__(self, index):
+        if index < self.labeled_len:
+            path, label = self.csv_file.iloc[index]
             X = Image.open(path)
             y = torch.scalar_tensor(label, dtype=torch.long)
         else:
-            X, _ = self.unlabeled_data[idx-self.l_len]
-            y = self.u_label[idx-self.l_len]
+            X, _ = self.unlabeled_data[index-self.labeled_len]
+            y = self.unlabeled_label[index-self.labeled_len]
             
-        if self.train:
-            X = self.augmentations(X)
-        else:
-            X = self.normalize(X)
+        if self.transform is not None and self.aug is None:
+            X = self.transform(image=np.array(X))['image']
+            return X, y
+        elif self.transform is not None and self.aug is None:
+            ori = self.transform(image=np.array(X))['image']
+            aug = self.aug(image=np.array(X))['image']
+            return aug, ori, y
         return X, y
     
-    # create labels for unlabeled data by input
-    def set_unlabeled_label(self, index, label):
-        self.u_label[index] = label
+    def set_labels(self, labels):
+        for i, label in enumerate(labels):
+            self.unlabeled_label[i] = label
