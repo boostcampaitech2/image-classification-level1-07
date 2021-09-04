@@ -20,15 +20,20 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 `-m2`: 모델2의 model weight 파일을 입력합니다.
 `-o`: 출력될 directory 위치를 입력합니다. dir는 자동으로 생성됩니다.
 
-원본 이미지:
+* 원본 이미지:
 
 ![](/sample/image.png)
 
-처리 후:
+* 처리 후:
 
 <img src="/sample/we_are_happy.png" alt="drawing" style="width:700px;"/>
 
+* 추가 이미지:
 
+<p float="left">
+  <img src="/sample/image2.crop0.png" width="250" />
+  <img src="/sample/image3.crop0.png" width="250" />
+</p>
 
 ---
 ## 전처리
