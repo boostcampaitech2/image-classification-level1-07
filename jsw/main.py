@@ -1,7 +1,6 @@
 import argparse
 from supervised.runners import train_cutmix
 
-
 import torch.nn as nn
 
 from data import *
@@ -38,7 +37,7 @@ if __name__ == '__main__':
         
         #? train teacher model
         teacher_model = build_wideresnet()
-        criterion = nn.CrossEntropyLoss()    
+        criterion = nn.CrossEntropyLoss()
         train_cutmix(train_dataset, val_dataset, teacher_model, criterion, lr_class=0.05, lr_back=0.0002, batch_size=128)
         
         del train_dataset

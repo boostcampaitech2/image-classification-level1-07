@@ -119,7 +119,7 @@ class CustomDataset(Dataset):
         self.csv_file = pd.read_csv(os.path.join(self.root, csv_dir))
     
     def __len__(self):
-        return len(self.csv_file['path'])
+        return len(self.csv_file['img_path'])
     
     def __getitem__(self, index):
         path, label = self.csv_file.iloc[index]

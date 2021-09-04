@@ -259,7 +259,7 @@ def revise_csv(root):
                     total_list.append(id_list)
                 flag = False
     
-    header = ['path, class']
+    header = ['img_path, class']
     with open('./train.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(header)
@@ -268,3 +268,112 @@ def revise_csv(root):
         writer = csv.writer(f)
         writer.writerow(header)
         writer.writerows(val_list)
+        
+        
+#? specific preprocess code for https://www.kaggle.com/tapakah68/medical-masks-p4 dataset
+#? crop face if face detected if not, remove image
+def preprocess_kaggle_dataset(path, device):
+    mtcnn = MTCNN(keep_all=True, device=device)
+    idx_list = []
+    csv_list = []
+    root = '/mnt/d/XuanZhi/kaggle/medical-masks-p4/images'
+    new_path = '/mnt/d/XuanZhi/kaggle/newinput'
+    df = pd.read_csv('/mnt/d/XuanZhi/kaggle/medical-masks-p4/df_part_4.csv')
+    for i in range(len(df['GENDER'])):
+        per_list = []
+        flag = False
+        if not 10 < int(df['AGE'].iloc[i]) < 100:
+            idx_list.append(i)
+            flag = True
+        elif df['GENDER'].iloc[i] != 'MALE' and df['GENDER'].iloc[i] != 'FEMALE':
+            idx_list.append(i)
+            flag = True
+        img_path = os.path.join(root, df['name'].iloc[i])
+        if flag:
+            if os.path.exists(img_path):
+                os.remove(os.path.join(root, df['name'].iloc[i]))
+        else:
+            if os.path.exists(img_path):
+                img = cv2.imread(img_path)
+                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+                boxes,probs = mtcnn.detect(img)
+                if not isinstance(boxes, np.ndarray):
+                    idx_list.append(i)
+                    os.remove(img_path)
+                else:
+                    xmin = int(boxes[0, 0])-30
+                    ymin = int(boxes[0, 1])-30
+                    xmax = int(boxes[0, 2])+30
+                    ymax = int(boxes[0, 3])+30
+                    
+                    if xmin < 0: xmin = 0
+                    if ymin < 0: ymin = 0
+                    if xmax > img.shape[0]: xmax = img.shape[0]
+                    if ymax > img.shape[1]: ymax = img.shape[1]
+                    
+                    img = img[ymin:ymax, xmin:xmax, :]
+                    
+                    try:
+                        img = cv2.resize(img, (224,224))
+                        plt.imsave(os.path.join(new_path, df['name'].iloc[i]), img)
+                        per_list.append(os.path.join(new_path, df['name'].iloc[i]))
+                        if int(df['AGE']) < 30:
+                            if int(df['TYPE']) == 1:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(3)
+                                else:
+                                    per_list.append(0)
+                            elif int(df['TYPE']) == 2:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(9)
+                                else:
+                                    per_list.append(6)
+                            else:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(15)
+                                else:
+                                    per_list.append(12)
+                        elif 30 <= int(df['AGE']) < 60:
+                            if int(df['TYPE']) == 1:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(4)
+                                else:
+                                    per_list.append(1)
+                            elif int(df['TYPE']) == 2:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(10)
+                                else:
+                                    per_list.append(7)
+                            else:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(16)
+                                else:
+                                    per_list.append(13)
+                        else:
+                            if int(df['TYPE']) == 1:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(5)
+                                else:
+                                    per_list.append(2)
+                            elif int(df['TYPE']) == 2:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(11)
+                                else:
+                                    per_list.append(8)
+                            else:
+                                if df['GENDER'] == 'FEMALE':
+                                    per_list.append(17)
+                                else:
+                                    per_list.append(14)
+                        csv_list.append(per_list)
+                    except:
+                        print('error')
+                    os.remove(os.path.join(img_path))
+                    print('done')
+            else:
+                print('no file')
+    header = ['img_path, class']
+    with open('./kaggle_data.csv', 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerows(csv_list)
