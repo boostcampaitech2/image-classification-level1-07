@@ -31,8 +31,8 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 * 추가 이미지:
 
 <p float="left">
-  <img src="/sample/image2.crop0.png" width="200" />
-  <img src="/sample/image3.crop0.png" width="200" />
+  <img src="/sample/image2.crop0.png" width="150" />
+  <img src="/sample/image3.crop0.png" width="150" />
 </p>
 
 ---
