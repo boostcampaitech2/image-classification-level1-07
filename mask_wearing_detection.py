@@ -46,7 +46,7 @@ class InferenceMaskWearing:
         self.sdg_transfrom = A.Compose([
             A.Resize(width=self.input_image_width,
                      height=self.input_image_height),
-            A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+            A.Normalize(mean=(0.55720607, 0.47626135, 0.44402045), std=(0.2195448 , 0.21720374 ,0.22056428)),
             ToTensorV2(),
         ])
 
@@ -131,7 +131,7 @@ class InferenceMaskWearing:
 if __name__ == '__main__':
     import argparse
 
-    from swjang import MyModel1
+    from share_jsw.model import *
     from share_sdg.sdg.model import Classification_normal
 
     parser = argparse.ArgumentParser(description='')
@@ -148,7 +148,7 @@ if __name__ == '__main__':
                         help='output directory name')
     args = parser.parse_args()
 
-    model1 = MyModel1(num_classes=18).to(device)
+    model1 = build_hybridViT().to(device)
     model1.eval()
 
     model2 = Classification_normal(model_name = 'vit_large_patch16_224', device = device).to(device)
