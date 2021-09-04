@@ -37,6 +37,7 @@ ___
 ```
 python main.py --mode TRAIN --data_root <given data root> --train_csv_file <train csv file name> --val_csv_file <validation csv file name> --extra_data_root <external dataset root>
 ```
+`extra_data_root`: 밑의 모든 외부 데이터셋을 모아 놓은 디렉토리
 ___
 Referenced External Datasets:
 
