@@ -21,7 +21,7 @@ cutMix_Flag = False
 seed_everything(44)
 continue_Flag = False
 if continue_Flag: 
-    continue_dict = torch.load('/opt/ml/input/data/eval/best_param/model_vitL_epoch_1-0.pt')
+    continue_dict = torch.load('/opt/ml/input/data/eval/best_param/model_vitL_epoch_0.pt')
 else:
     continue_dict = None
 
