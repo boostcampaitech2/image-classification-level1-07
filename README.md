@@ -29,7 +29,8 @@ ___
 ```
 python main.py --mode TRAIN --data_root <given data root> --extra_data_root <external dataset root>
 ```
-<span style="color:red">!!!</span>: only input extra data root for `medical mask part 4` dataset
+:bulb:: only input extra data root for `medical mask part 4` dataset
+
 ___
 
 `TRAIN`: 모델 학습
