@@ -45,7 +45,8 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 
 ## 모델A(model_pseudo_labeling)
 
-![](/images/pseudo_labeling.png)
+<img src="/images/pseudo_labeling.png" alt="drawing" style="background-color:red;"/>
+
 
 ### Model
 ```bash
