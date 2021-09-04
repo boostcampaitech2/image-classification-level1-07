@@ -24,17 +24,30 @@ class InferenceMaskWearing:
                  model1_weight=0.5,
                  model2_weight=0.5,
                  output_path='output',
-                 image_width=224,
-                 image_height=224) -> None:
+                 crop_image_width=224,
+                 crop_image_height=224) -> None:
         self.mtcnn = MTCNN(keep_all=True, device=device)
         self.model1 = model1
         self.model2 = model2
         self.model1_weight = model1_weight
         self.model2_weight = model2_weight
-        self.input_image_width = image_width
-        self.input_image_height = image_height
+        self.crop_image_width = crop_image_width
+        self.crop_image_height = crop_image_height
         self.output_path = output_path
         Path(f"{output_path}/crop_image").mkdir(parents=True, exist_ok=True)
+
+        self.swj_transfrom = A.Compose([
+            A.Resize(width=self.input_image_width,
+                     height=self.input_image_height),
+            A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+            ToTensorV2(),
+        ])
+        self.sdg_transfrom = A.Compose([
+            A.Resize(width=self.input_image_width,
+                     height=self.input_image_height),
+            A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+            ToTensorV2(),
+        ])
 
     def crop_image(self, img):
         """
@@ -99,10 +112,12 @@ class InferenceMaskWearing:
 
         with torch.no_grad():
             # 수정 필요합니다.
-            _img = ToTensorV2()(image=crop_img)['image'][None, :]
-            _img = _img.to(device).float()
-            pred_from_model1 = self.model1(_img)
-            pred_from_model2 = self.model2(_img)
+            swj_img = self.swj_transfrom(
+                image=crop_img)['image'][None, :].to(device).float()
+            sdg_img = self.sdg_transfrom(
+                image=crop_img)['image'][None, :].to(device).float()
+            pred_from_model1 = self.model1(swj_img)
+            pred_from_model2 = self.model2(sdg_img)
             # ensemble_pred is from hard-coded weights.
             ensemble_pred = self.model1_weight * pred_from_model1 + self.model2_weight * pred_from_model2
             final_pred = ensemble_pred.argmax(dim=-1).cpu().item()
