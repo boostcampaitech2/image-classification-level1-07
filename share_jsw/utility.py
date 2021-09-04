@@ -276,9 +276,9 @@ def preprocess_kaggle_dataset(path, device):
     mtcnn = MTCNN(keep_all=True, device=device)
     idx_list = []
     csv_list = []
-    root = '/mnt/d/XuanZhi/kaggle/medical-masks-p4/images'
-    new_path = '/mnt/d/XuanZhi/kaggle/newinput'
-    df = pd.read_csv('/mnt/d/XuanZhi/kaggle/medical-masks-p4/df_part_4.csv')
+    root = os.path.join(path, 'images')
+    new_path = os.path.join(path, 'images')
+    df = pd.read_csv(os.path.join(path, 'df_part_4.csv'))
     for i in range(len(df['GENDER'])):
         per_list = []
         flag = False

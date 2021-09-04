@@ -10,7 +10,7 @@ from runners import *
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--mode', type=str, required=True, help='SELECT MODE: PREPROCESS, TRAIN, INFERENCE')
+parser.add_argument('--mode', type=str, required=True, help='SELECT MODE: PREPROCESS, TRAIN')
 parser.add_argument('--data_root', type=str, default='', help='path of data root')
 parser.add_argument('--train_csv_file', type=str, default='train.csv', help='train csv file name')
 parser.add_argument('--val_csv_file', type=str, default='val.csv', help='val csv file name')
@@ -66,4 +66,4 @@ if __name__ == '__main__':
             face_crop(args.data_root, device)
             revise_csv(args.data_root)
         if args.extra_data_root != '':
-            face_crop(args.extra_data_root, device)
+            preprocess_kaggle_dataset(args.extra_data_root, device)
