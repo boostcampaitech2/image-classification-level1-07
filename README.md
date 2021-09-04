@@ -14,7 +14,8 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 ```bash
 ./infer_mask -i sample/image.png
 ```
-이미지를 인식하여 다중 얼굴 인식하여 마스크 착용 유무를 확인합니다.
+이미지를 입력받아 여러 사람의 얼굴을 인식하여 마스크 착용 유무를 확인합니다.
+
 `-i`: 이미지의 path를 입력합니다.  
 `-m1`: 모델1의 model weight 파일을 입력합니다.  
 `-m2`: 모델2의 model weight 파일을 입력합니다.  
@@ -26,7 +27,7 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 
 * 처리 후:
 
-<img src="/sample/we_are_happy.png" alt="drawing" style="width:750px;"/>
+<img src="/sample/we_are_happy.png" alt="drawing" style="width:700px;"/>
 
 * 추가 이미지:
 
