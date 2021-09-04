@@ -149,11 +149,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     model1 = build_hybridViT().to(device)
+    model1_pth = ''
+    model1.load_state_dict(model1_pth)
     model1.eval()
 
     model2 = Classification_normal(model_name = 'vit_large_patch16_224', device = device).to(device)
-    param_dir = ''
-    model2_state_dict = torch.load(param_dir)
+    model2_pth = ''
+    model2_state_dict = torch.load(model2_pth)
     model2.load_state_dict(model2_state_dict['model_state_dict'])
     model2.eval()
 
