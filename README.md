@@ -23,7 +23,7 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 
 * 원본 이미지:
 
-![](/sample/image.png)
+![](/images/image.png)
 
 * 처리 후:
 
@@ -43,10 +43,13 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 
 ---
 
-## 모델A(share_jsw)
+## 모델A(model_pseudo_labeling)
+
+![](/images/pseudo_labeling.png)
+
 ### Model
 ```bash
-jsw
+model_pseudo_labeling
 ├── data.py
 ├── model.py
 ├── main.py
@@ -81,7 +84,7 @@ ___
 python main.py --mode TRAIN --data_root <given data root> --train_csv_file <train csv file name> --val_csv_file <validation csv file name> --extra_data_root <external dataset root>
 ```
 `extra_data_root`: 밑의 모든 외부 데이터셋을 모아 놓은 디렉토리
-___
+
 Referenced External Datasets:
 
 https://www.kaggle.com/tapakah68/medical-masks-p4
@@ -92,7 +95,10 @@ https://www.kaggle.com/rashikrahmanpritom/age-recognition-dataset
 
 https://www.kaggle.com/spandanpatnaik09/face-mask-detectormask-not-mask-incorrect-mask
 
-## 모델B(share_sdg)
+___
+## 모델B(model_ViT_Large)
+
+![](/images/vit.png)
 
 ### file_path
 #### 1. 전처리를 통해 저장된 이미지와 그에 따른 csv파일이 다음과 같은 경로에 있어야 정상적으로 작동이 가능합니다. 

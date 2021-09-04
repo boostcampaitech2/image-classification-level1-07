@@ -10,8 +10,8 @@ from albumentations import *
 from albumentations.pytorch.transforms import *
 from torch.utils.data import Dataset, DataLoader
 
-from share_sdg.sdg.model_normal import *
-from share_jsw.model import *
+from model_ViT_Large.sdg.model_normal import *
+from model_pseudo_labeling.model import *
 
 parser = argparse.ArgumentParser()
 

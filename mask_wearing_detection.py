@@ -136,8 +136,8 @@ class InferenceMaskWearing:
 if __name__ == '__main__':
     import argparse
 
-    from share_jsw.model import build_hybridViT
-    from share_sdg.sdg.model_normal import Classification_normal
+    from model_pseudo_labeling.model import build_hybridViT
+    from model_ViT_Large.sdg.model_normal import Classification_normal
 
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-i',
