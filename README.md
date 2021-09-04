@@ -8,7 +8,29 @@
 </h3>
 
 COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람이 정확한 마스크 착용을 해야한다. 인적 자원 효율성을 위해 카메라로 비춰진 사람 얼굴 이미지 만으로 올바른 마스크 착용 여부를 판단하는 시스템 개발을 목적으로한다.
+
 ## 시연결과
+
+```bash
+./infer_mask -i sample/image.png
+```
+이미지를 인식하여 다중 얼굴 인식하여 마스크 착용 유무를 확인합니다.
+`-i`: 이미지의 path를 입력합니다.
+`-m1`: 모델1의 model weight 파일을 입력합니다.
+`-m2`: 모델2의 model weight 파일을 입력합니다.
+`-o`: 출력될 directory 위치를 입력합니다. dir는 자동으로 생성됩니다.
+
+원본 이미지:
+
+![](/sample/image.png)
+
+처리 후:
+
+![](/sample/we_are_happy.png =250x)
+
+<img src="/sample/we_are_happy.png" alt="drawing" style="width:200px;"/>
+
+
 
 ---
 ## 전처리
