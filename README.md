@@ -95,7 +95,7 @@ https://www.kaggle.com/spandanpatnaik09/face-mask-detectormask-not-mask-incorrec
 
 - `combine.csv` : `/opt/ml/input/data/train/combine.csv`
 
--> 기존 데이터셋(aistages)에 대한 csv 파일과 외부 [데이터셋](https://www.kaggle.com/tapakah68/medical-masks-p4?select=df_part_4.csv)에 대한 csv 파일을 concat한 csv 파일. csv 파일내에 각 이미지들이 전처리되어 저장된 경로와 class가 들어있고, `dataset.py`에서 해당 파일을 판다스 DataFrame 파일로 읽어 데이터를 불러오는 방식입니다.
+-> 기존 데이터셋(aistages)에 대한 csv 파일과 [외부데이터셋](https://www.kaggle.com/tapakah68/medical-masks-p4?select=df_part_4.csv)에 대한 csv 파일을 concat한 csv 파일. csv 파일내에 각 이미지들이 전처리되어 저장된 경로와 class가 들어있고, `dataset.py`에서 해당 파일을 판다스 DataFrame 파일로 읽어 데이터를 불러오는 방식입니다.
 
 - `train_labeled_val.csv` : `/opt/ml/input/data/train/train_labeled_val.csv`
 
@@ -135,3 +135,17 @@ sdg
 안에서 조정이 가능합니다. 학습시 `train.py`를 통해 매 에폭 마다 파라미터와 optimizer state_dict가 저장됩니다. 이는 추후 같은 파라미터로 학습을 재개하기 위한 방법입니다. 
 
 - 추론시 : sdg dir 내에서 `python inference.py` 로 실행하시면 됩니다. 가장 좋은 파라미터 파일을 모델에 불러와 eval 데이터셋에 대한 분류작업을 진행하여 그 결과를 `submission.csv`로 저장합니다. 
+
+___
+### Submission
+`ensemble.py`: 
+```
+python ensemble.py --mode_a <Model A parameter file path> --model_b <Model B parameter file path> --root <evaluation data root directory>
+```
+실행 방법:
+
+`model_a`: 모델 A 파라미터 파일 경로
+
+`model_b`: 모델 B 파라미터 파일 경로
+
+`root`: evaluation 데이터 경로

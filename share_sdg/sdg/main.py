@@ -17,7 +17,7 @@ batch_size=32
 early_stop=5
 learning_rate=1e-3
 num_epochs=12
-cutMix_Flag = False
+cutMix_Flag = True
 seed_everything(44)
 continue_Flag = False
 if continue_Flag: 
