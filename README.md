@@ -113,3 +113,17 @@ sdg
 안에서 조정이 가능합니다. 학습시 `train.py`를 통해 매 에폭 마다 파라미터와 optimizer state_dict가 저장됩니다. 이는 추후 같은 파라미터로 학습을 재개하기 위한 방법입니다. 
 
 - 추론시 : sdg dir 내에서 `python inference.py` 로 실행하시면 됩니다. 가장 좋은 파라미터 파일을 모델에 불러와 eval 데이터셋에 대한 분류작업을 진행하여 그 결과를 `submission.csv`로 저장합니다. 
+
+___
+### Submission
+`ensemble.py`: 
+```
+python ensemble.py --mode_a <Model A parameter file path> --model_b <Model B parameter file path> --root <evaluation data root directory>
+```
+실행 방법:
+
+`model_a`: 모델 A 파라미터 파일 경로
+
+`model_b`: 모델 B 파라미터 파일 경로
+
+`root`: evaluation 데이터 경로
