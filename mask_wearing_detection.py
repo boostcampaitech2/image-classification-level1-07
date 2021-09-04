@@ -13,6 +13,7 @@ import cv2
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
+
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} device'.format(device))
 
@@ -131,7 +132,7 @@ if __name__ == '__main__':
     import argparse
 
     from swjang import MyModel1
-    from dgseo import MyModel2
+    from share_sdg.sdg.model import Classification_normal
 
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-i',
@@ -150,7 +151,10 @@ if __name__ == '__main__':
     model1 = MyModel1(num_classes=18).to(device)
     model1.eval()
 
-    model2 = MyModel2(num_classes=18).to(device)
+    model2 = Classification_normal(model_name = 'vit_large_patch16_224', device = device).to(device)
+    param_dir = ''
+    model2_state_dict = torch.load(param_dir)
+    model2.load_state_dict(model2_state_dict['model_state_dict'])
     model2.eval()
 
     inference_mask_wearing = InferenceMaskWearing(model1,
