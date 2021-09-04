@@ -26,9 +26,7 @@ COVID-19의 감염 확산 방지를 위해서는 공공 장소의 모든 사람�
 
 처리 후:
 
-![](/sample/we_are_happy.png =250x)
-
-<img src="/sample/we_are_happy.png" alt="drawing" style="width:200px;"/>
+<img src="/sample/we_are_happy.png" alt="drawing" style="width:700px;"/>
 
 
 
